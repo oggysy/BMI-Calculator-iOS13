@@ -35,12 +35,11 @@ class CalculateViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToResult" {
-            let destinationVC = segue.destination as! ResultsViewController
+        //segue.identifierが"goToResult"でないか、segue.destinationの型キャストに失敗し、nilとなった場合処理を抜ける
+        guard segue.identifier == "goToResult", let destinationVC = segue.destination as? ResultsViewController else { return }
             destinationVC.bmiValue = calculatorBrain.getBMIValue()
             destinationVC.advice = calculatorBrain.getAdvice()
             destinationVC.color = calculatorBrain.getColor()
-        }
     }
 }
 
